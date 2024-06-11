@@ -1,0 +1,10 @@
+[
+  {
+    "category": "summer",
+    "img": "products.jpg",
+    "name": "Tire A",
+    "price": 90,
+    "description": "Can handle high temperature and Dry environment",
+    "experienceLabel": "experience"
+  }
+]

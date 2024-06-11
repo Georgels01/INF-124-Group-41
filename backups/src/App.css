@@ -1,0 +1,60 @@
+
+  header {
+    background-color: #A08ACC;
+    color: #fff;
+    text-align: center;
+    padding: 1rem;
+  }
+
+  .scroll-down {
+    background-color: #A08ACC;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+  }
+
+  .filter {
+    background-color: #A08ACC;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+  }
+
+  .categories {
+    list-style: none;
+    display: flex;
+  }
+
+  .categories li {
+    margin-right: 10px;
+    cursor: pointer;
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+
+  .gallery-section {
+    background-color: #A08ACC;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 20px;
+  }
+  
+  .button {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+    cursor: pointer;
+  }
+
+  .button img {
+    max-width: 50%;
+  }
+
+  .button img:hover {
+    transform: scale(1.1);
+    transition: transform 0.3s ease;
+  }
+
+  

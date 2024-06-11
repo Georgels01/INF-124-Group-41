@@ -1,0 +1,34 @@
+[
+  {
+    "category": "summer",
+    "img": "products.jpg",
+    "name": "Tire A",
+    "price": 90,
+    "description": "Can handle high temperature and Dry environment",
+    "experienceLabel": "experience"
+  },
+  {
+    "category": "winter",
+    "img": "Products2.jpg",
+    "name": "Tire C",
+    "price": 60,
+    "description": "Can handle Low temperature and snow environment",
+    "experienceLabel": "experience3"
+  },
+  {
+    "category": "summer",
+    "img": "products.jpg",
+    "name": "Tire B",
+    "price": 70,
+    "description": "Can handle high temperature and muddy environment",
+    "experienceLabel": "experience2"
+  },
+  {
+    "category": "winter",
+    "img": "Products2.jpg",
+    "name": "Tire C",
+    "price": 60,
+    "description": "Can handle Low temperature and snow environment",
+    "experienceLabel": "experience3"
+  }
+]

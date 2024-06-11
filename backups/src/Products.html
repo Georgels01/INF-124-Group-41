@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="Home.css">
+  <title>Products</title>
+</head>
+<body>
+<header>
+  <h1>Products</h1>
+</header>
+<main>
+  <section class="filter">
+    <h2>Filter</h2>
+    <ul class="categories">
+      <li data-category="all">All</li>
+      <li data-category="winter">Winter</li>
+      <li data-category="summer">Summer</li>
+    </ul>
+  </section>
+
+  <section class="gallery-section">
+    <div class="button" data-category = "summer">
+      <img src="products.jpg" alt="Product">
+      <p>Tire A</p>
+      <button class="details-button">Tire for Summer 1</button>
+
+      <div class="product-details" style="display: none;">
+        <strong>$70</strong>
+        <p>Can handle high temperature and Dry environment</p>
+
+        <strong>User Experience</strong>
+        <p>    George: good overall.</p>
+
+        <p>&nbsp;</p>
+
+
+        <form>
+          <label for="experience">Experience:</label>
+          <input type="text" id="experience" name="experience"><br><br>
+          <input type="submit" value="Add Your Experience">
+        </form>
+
+
+      <button>Add to Cart</button>
+
+      </div>
+
+    </div>
+
+    <div class="button" data-category = "summer">
+      <img src="products.jpg" alt="Product">
+      <p>Tire B</p>
+      <button class="details-button">Tire for Summer 2</button>
+
+      <div class="product-details" style="display: none;">
+        <strong>$70</strong>
+        <p>Can handle high temperature and muddy environment</p>
+
+        <strong>User Experience</strong>
+        <p>    George: good overall.</p>
+
+        <p>&nbsp;</p>
+
+
+        <form>
+          <label for="experience2">Experience:</label>
+          <input type="text" id="experience2" name="experience2"><br><br>
+          <input type="submit" value="Add Your Experience">
+        </form>
+
+
+        <button>Add to Cart</button>
+
+      </div>
+    </div>
+
+    <div class="button" data-category = "winter">
+      <img src="Products2.jpg" alt="Products">
+      <p>Tire C</p>
+      <button class="details-button">Tire for Winter</button>
+
+      <div class="product-details" style="display: none;">
+        <strong>$70</strong>
+        <p>Can handle Low temperature and snow environment</p>
+
+        <strong>User Experience</strong>
+        <p>    George: good overall.</p>
+
+        <p>&nbsp;</p>
+
+
+        <form>
+          <label for="experience3">Experience:</label>
+          <input type="text" id="experience3" name="experience3"><br><br>
+          <input type="submit" value="Add Your Experience">
+        </form>
+
+
+        <button>Add to Cart</button>
+
+      </div>
+    </div>
+
+  </section>
+</main>
+<script src="Home.js"></script>
+</body>
+</html>
