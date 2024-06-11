@@ -8,7 +8,7 @@ const PORT = 3000;
 app.use(cors());
 app.use(bodyParser.json());
 
-const uri = "mongodb+srv://shuail15:q540546322@tireshop.0rpkauv.mongodb.net/?retryWrites=true&w=majority&appName=Tireshop";
+const uri = "mongodb://localhost:27017/tire-shop";
 mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true }).then(() => {
   console.log('Connected to MongoDB');
   loadProducts();  // Call loadProducts after connection is established
