@@ -1,9 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const Products = () => {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [visibleDetails, setVisibleDetails] = useState({});
   const [experiences, setExperiences] = useState({});
+
+  // Hardcoded products for testing
+  const hardcodedProducts = [
+
+  ];
+
+  // State for products which starts with hardcoded products
+  const [products, setProducts] = useState(hardcodedProducts);
+
+  useEffect(() => {
+    fetch('http://localhost:3000/api/products')
+      .then(response => response.json())
+      .then(data => setProducts([...hardcodedProducts, ...data])) // Combine fetched products with hardcoded
+      .catch(error => console.error('Error loading products:', error));
+  }, []);
 
   const categoryClick = (category) => {
     setSelectedCategory(category);
@@ -26,32 +41,22 @@ const Products = () => {
     });
   };
 
-  const products = [
-    {
-      category: 'summer',
-      img: 'products.jpg',
-      name: 'Tire A',
-      price: 90,
-      description: 'Can handle high temperature and Dry environment',
-      experienceLabel: 'experience',
-    },
-    {
-      category: 'summer',
-      img: 'products.jpg',
-      name: 'Tire B',
-      price: 70,
-      description: 'Can handle high temperature and muddy environment',
-      experienceLabel: 'experience2',
-    },
-    {
-      category: 'winter',
-      img: 'Products2.jpg',
-      name: 'Tire C',
-      price: 60,
-      description: 'Can handle Low temperature and snow environment',
-      experienceLabel: 'experience3',
-    },
-  ];
+const addToCart = async (product) => {
+  try {
+    const response = await fetch('http://localhost:3000/api/addToCart', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ product }),
+    });
+    const data = await response.json();
+    alert(data.message);  // Notify user about success
+  } catch (error) {
+      console.error('Error adding product to cart:', error);
+      alert('Failed to add product to cart.');  // Notify user about failure
+  }
+};
 
   return (
     <div>
@@ -71,55 +76,37 @@ const Products = () => {
             <li onClick={() => categoryClick('summer')} data-category="summer">Summer</li>
           </ul>
         </section>
-
-
         <section className="gallery-section">
           {products
             .filter(product => selectedCategory === 'all' || product.category === selectedCategory)
             .map((product, index) => (
-
               <div key={index} className="button" data-category={product.category}>
                 <img src={product.img} alt={product.name} />
-
                 <p>{product.name}</p>
-
                 <button className="details-button" onClick={() => detailsClick(index)}>
-                  {product.name}
-
+                  Details
                 </button>
-
                 {visibleDetails[index] && (
-
                   <div className="product-details">
-
                     <strong>${product.price}</strong>
                     <p>{product.description}</p>
                     <strong>User Experience</strong>
-                    <p>George: good overall.</p>
-
                     {experiences[index] && experiences[index].map((exp, expIndex) => (
                       <p key={expIndex}>{exp}</p>
                     ))}
-
-
                     <form onSubmit={(exp) => {
                       exp.preventDefault();
-
                       const experience = exp.target.elements[product.experienceLabel].value;
                       if (experience) {
                         submitExp(index, experience);
                         exp.target.elements[product.experienceLabel].value = '';
                       }
-
                     }}>
-
                       <label htmlFor={product.experienceLabel}>Experience:</label>
-
-                      <input type="text" id={product.experienceLabel} name={product.experienceLabel} /><br /><br />
+                      <input type="text" id={product.experienceUserLabel} name={product.experienceLabel} /><br /><br />
                       <input type="submit" value="Add Your Experience" />
-
                     </form>
-                    <button>Add to Cart</button>
+                    <button onClick={() => addToCart(product)}>Add to Cart</button>
                   </div>
                 )}
               </div>

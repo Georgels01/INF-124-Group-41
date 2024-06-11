@@ -1,75 +1,50 @@
-// Account.js
-import React from 'react';
+import React, { useState } from 'react';
 
 const Account = () => {
-  return (<>
-  <meta charSet="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="Home.css" />
-  <title>Account</title>
-  <header>
-    <h1>Account</h1>
-  </header>
-  <main>
-    <section className="gallery-section">
-      <div className="button">
-        <button
-          style={{
-            fontSize: "1.5em",
-            backgroundColor: "#A08ACC",
-            color: "#fff"
-          }}
-          className="details-button"
-        >
-          Log in
-        </button>
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [isLogin, setIsLogin] = useState(true);
 
-          <form action="/home.html">
-            <p>&nbsp;</p>
-            <label htmlFor="uname">Username:</label>
-            <input type="text" id="uname" name="uname" />
-            <br />
-            <br />
-            <label htmlFor="pword">Password:</label>
-            <input type="text" id="pword" name="pword" />
-            <br />
-            <br />
-            <input type="submit" defaultValue="Confirm" />
+const handleSubmit = async (event) => {
+  event.preventDefault();
+  const endpoint = isLogin ? 'http://localhost:3000/api/login' : 'http://localhost:3000/api/create';
+  const response = await fetch(endpoint, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ username, password }),
+  });
+  const data = await response.json();
+  alert(data.message);
+};
+  return (
+    <>
+      <meta charSet="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="stylesheet" href="Home.css" />
+      <title>Account</title>
+      <header>
+        <h1>{isLogin ? 'Log In' : 'Create Account'}</h1>
+      </header>
+      <main>
+        <section className="gallery-section">
+          <form onSubmit={handleSubmit}>
+            <label htmlFor="uname">{isLogin ? 'Username:' : 'New Username:'}</label>
+            <input type="text" id="uname" name="uname" value={username} onChange={(e) => setUsername(e.target.value)} />
+            <br /><br />
+            <label htmlFor="pword">{isLogin ? 'Password:' : 'New Password:'}</label>
+            <input type="password" id="pword" name="pword" value={password} onChange={(e) => setPassword(e.target.value)} />
+            <br /><br />
+            <input type="submit" defaultValue={isLogin ? 'Log In' : 'Create Account'} />
+            <button type="button" onClick={() => setIsLogin(!isLogin)} style={{ marginLeft: '10px' }}>
+              Switch to {isLogin ? 'Create Account' : 'Log In'}
+            </button>
           </form>
-
-      </div>
-    </section>
-    <section className="gallery-section">
-      <div className="button">
-        <button
-          style={{
-            fontSize: "1.5em",
-            backgroundColor: "#A08ACC",
-            color: "#fff"
-          }}
-          className="details-button"
-        >
-          Create Account
-        </button>
-
-          <form action="/home.html">
-            <p>&nbsp;</p>
-            <label htmlFor="uname2">Username:</label>
-            <input type="text" id="uname2" name="uname" />
-            <br />
-            <br />
-            <label htmlFor="pword2">Password:</label>
-            <input type="text" id="pword2" name="pword" />
-            <br />
-            <br />
-            <input type="submit" defaultValue="Confirm" />
-          </form>
-
-      </div>
-    </section>
-  </main>
-</>
-);
+        </section>
+      </main>
+    </>
+  );
 };
 
 export default Account;

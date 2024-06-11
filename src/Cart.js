@@ -1,17 +1,26 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const Cart = () => {
-  const [count, setCount] = useState(1);
-  const pricePerItem = 70; // Price of one item
-  const totalPrice = count * pricePerItem;
+  const [cartItems, setCartItems] = useState([]);
 
-  const Increment = () => {
-    setCount(count + 1);
+  useEffect(() => {
+    fetch('http://localhost:3000/api/cart')
+      .then(response => response.json())
+      .then(data => setCartItems(data))
+      .catch(error => console.error('Error loading cart items:', error));
+  }, []);
+
+  const incrementCount = (index) => {
+    const newCartItems = [...cartItems];
+    newCartItems[index].count = (newCartItems[index].count || 1) + 1;
+    setCartItems(newCartItems);
   };
 
-  const Decrement = () => {
-    if (count > 1) {
-      setCount(count - 1);
+  const decrementCount = (index) => {
+    const newCartItems = [...cartItems];
+    if (newCartItems[index].count > 1) {
+      newCartItems[index].count -= 1;
+      setCartItems(newCartItems);
     }
   };
 
@@ -26,22 +35,23 @@ const Cart = () => {
       </header>
       <main>
         <section className="gallery-section">
+          {cartItems.map((item, index) => (
+            <div key={index} className="button">
+              <img src={item.img || 'default-product.jpg'} alt={item.name || "Product"} />
+              <p>{item.name}</p>
+              <p>${item.price}</p>
+              <h1 className="display">{item.count || 1}</h1>
+              <button className="minus" onClick={() => decrementCount(index)}>-</button>
+              <button className="plus" onClick={() => incrementCount(index)}>+</button>
+            </div>
+          ))}
+          <p style={{ fontSize: '1.5em' }}>Total: ${cartItems.reduce((total, item) => total + (item.price * (item.count || 1)), 0)}</p>
           <div className="button">
-            <img src="products.jpg" alt="Product" />
-            <p>Tire A</p>
-            <p>${pricePerItem}</p>
-            <h1 className="display">{count}</h1>
-            <button className="minus" onClick={Decrement}>-</button>
-            <button className="plus" onClick={Increment}>+</button>
-          </div>
-          <p style={{ fontSize: '1.5em' }}>Total: ${totalPrice}</p>
-          <div className="button">
-
-          <p> Change Shipping Location </p>
+            <p> Change Shipping Location </p>
             <form action='/Shipping'>
               <input type="submit" defaultValue="Change Shipping Location" />
             </form>
-          <p> Payment Information </p>
+            <p> Payment Information </p>
             <form action='/Payment'>
               <input type="submit" defaultValue="Payment Information" />
             </form>

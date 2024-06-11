@@ -14,19 +14,8 @@ const Payment_Confirm = () => {
         </header>
         <main>
           <section className="gallery-section">
-            <div className="button">
-              <img src="products.jpg" alt="Product" />
-              <p>Tire A</p>
-              <p>$70</p>
-            </div>
-            <p style={{fontSize: '1.5em'}}> Total: $70 </p>
-            <p> Shipping to
-              XXX Drive, Irvine, California</p>
-            <div className="button">
-              <form action="/Products">
-                <input type="submit" defaultValue="Confirm" />
-              </form>
-            </div>
+
+            <p> Payment Approval</p>
           </section>
         </main>
       </div>
